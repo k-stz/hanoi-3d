@@ -1,0 +1,48 @@
+body { 
+    margin: 0; 
+    height: 0; 
+}
+canvas { 
+    display: block; 
+}
+
+h1 {
+    top: 0;
+    position: absolute;
+    font-family: 'Montserrat';
+    font-size: 1em;
+    text-transform: uppercase;
+    width: auto;
+    border: 1px solid black;
+    padding: 0px;
+    margin: 5px;
+
+}
+
+
+#infobox {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    z-index: 100;
+    display: block;
+    /* bottom right corner */
+    bottom: 0;
+    right: 0;
+}
+
+#watermark {
+ position:fixed;
+ text-indent: -9999px;
+ width: 7%;
+ height: 100%;
+ top:5px;
+ right:5px;
+ opacity:0.5;
+ z-index:99;
+ background-image: url("/images/kai_logo.jpg");
+ background-repeat: no-repeat;
+ background-size: contain;
+ font-family: 'Montserrat';
+ color: black;
+}
