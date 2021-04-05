@@ -5,7 +5,7 @@
 import * as THREE from '/js/three.module.js';
 
 //import { OrbitControls } from '/js/OrbitControls.js';
-import { OrbitControls } from './vendor/three/examples/jsm/controls/OrbitControls.js';
+import { OrbitControls } from '/js/OrbitControls.js';
 
 const scene = new THREE.Scene();
 // THREE.PerspectiveCamera(<FOV>, <aspect-ration>, <near-clipping-plane>, <far-clipping-plane> );
@@ -208,7 +208,7 @@ function onDocumentMouseDown( event ) {
         
         var tl = gsap.timeline();
         tl.to(disk.position, 0.2, {z: 2.0, ease: Linear.easyNone}); // move up
-        tl.to(disk.position, 0.5, {x: x_pos, y: y_pos, ease: Linear.easyNone});
+        tl.to(disk.position, 5.5, {x: x_pos, y: y_pos, ease: Linear.easyNone});
         tl.to(disk.position, 0.2, {z: z_pos, ease: Linear.easyNone});
         selected_rod.material.opacity = 0.1; selected_rod = null;
     } else {
