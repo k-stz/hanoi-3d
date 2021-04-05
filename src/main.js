@@ -8,8 +8,6 @@
 import { OrbitControls } from 'https://unpkg.com/three@0.119.0/examples/jsm/controls/OrbitControls.js';
 
 
-
-
 const scene = new THREE.Scene();
 // THREE.PerspectiveCamera(<FOV>, <aspect-ration>, <near-clipping-plane>, <far-clipping-plane> );
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -18,7 +16,7 @@ const renderer = new THREE.WebGLRenderer({antialias: true});
 const controls = new OrbitControls(camera, renderer.domElement);
 //let controls = new OrbitControls( camera, renderer.domElement );
 // // override with my pointer down event
-// controls.addEventListener('start', interceptOrbitalControlEvents, false);
+controls.addEventListener('start', interceptOrbitalControlEvents, false);
 
 renderer.setClearColor("#e5e5e5");
 // To render app at lower resolution use setSize(w,h, false_here)
@@ -34,7 +32,6 @@ window.addEventListener('resize', () => {
 
 // (0,0,0) is also the origin origin of the camera, which is bad so we move the camera away a bit
 camera.position.z = 7;
-
 
 // Now we add a cube
 const geometry = new THREE.BoxGeometry();
@@ -101,7 +98,6 @@ let raycaster, INTERSECTED;
 const mouse = new THREE.Vector2();
 document.addEventListener( 'mousemove', onDocumentMouseMove );
 document.addEventListener( 'mousedown', onDocumentMouseDown );
-document.addEventListener( 'mouseup', onDocumentMouseUp );
 function init() {
     raycaster = new THREE.Raycaster();
 }
@@ -169,8 +165,8 @@ function onDocumentMouseDown( event ) {
         return
     }
     if (INTERSECTED == null) {
+        enableCameraRotation(true);
         console.log("nothing here!")
-        //controls.enabled = true;
         if (selected_rod) {
             selected_rod.material.opacity = 0.1; selected_rod = null;
         }
@@ -191,6 +187,7 @@ function onDocumentMouseDown( event ) {
             let top_source_disk = selected_rod.stack[source_stack_height - 1]; // peek()-Operation is lacking in js
             let top_target_disk = INTERSECTED.stack[target_stack_height - 1]; 
             if (top_target_disk.number > top_source_disk.number) { // Top target disk is smaller
+                selected_rod.material.opacity = 0.1; selected_rod = null;
                 console.log("Target's top disk is smaller! ")
                 forbidden_move_action()
                 return;
@@ -241,19 +238,19 @@ function onDocumentMouseMove( event ) {
 
 }
 
-function onDocumentMouseUp( event ) {
-    event.preventDefault();
-    // all it ever does is disable camera control
-    // in this way the camera only works when we click where there is no Intersected Object
-    // (onDocumentMouseDown triggers this on INTERSECTED == Null)
-
-}
-
 function interceptOrbitalControlEvents ( event ) {
     console.log("interceptOrbitalControlEvents...")
     if (INTERSECTED) {
-        controls.enabled = false;
+        enableCameraRotation(false);
     } else {
-        controls.enabled = true;
+        enableCameraRotation(true);
+    }
+}
+
+function enableCameraRotation(boolean_switch) {
+    if (boolean_switch) {
+        controls.enableRotate = true;
+    } else {
+        controls.enableRotate = false;
     }
 }
