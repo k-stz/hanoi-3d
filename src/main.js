@@ -168,7 +168,7 @@ function onDocumentMouseDown( event ) {
     }
     if (INTERSECTED == null) {
         console.log("nothing here!")
-        controls.enabled = true;
+        //controls.enabled = true;
         if (selected_rod) {
             selected_rod.material.opacity = 0.1; selected_rod = null;
         }
