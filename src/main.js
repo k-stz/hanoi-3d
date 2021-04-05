@@ -5,7 +5,7 @@
 import * as THREE from '/js/three.module.js';
 
 //import { OrbitControls } from '/js/OrbitControls.js';
-import { OrbitControls } from '/js/OrbitControls.js';
+// import { OrbitControls } from '/js/OrbitControls.js';
 
 const scene = new THREE.Scene();
 // THREE.PerspectiveCamera(<FOV>, <aspect-ration>, <near-clipping-plane>, <far-clipping-plane> );
@@ -13,10 +13,10 @@ const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.inner
 const renderer = new THREE.WebGLRenderer({antialias: true});
 
 
-let controls = new OrbitControls( camera, renderer.domElement );
-console.log("Camera controls disabled!")
-// override with my pointer down event
-controls.addEventListener('start', interceptOrbitalControlEvents, false);
+// let controls = new OrbitControls( camera, renderer.domElement );
+// console.log("Camera controls disabled!")
+// // override with my pointer down event
+// controls.addEventListener('start', interceptOrbitalControlEvents, false);
 
 renderer.setClearColor("#e5e5e5");
 // To render app at lower resolution use setSize(w,h, false_here)
