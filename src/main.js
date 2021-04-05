@@ -2,10 +2,11 @@
 // Our Javascript will go here.
 
 // first we import everything from the three.s core into this script under the "THREE" namespace:
-import * as THREE from '/js/three.module.js';
+// import * as THREE from '/js/three.module.js';
+
 
 //import { OrbitControls } from '/js/OrbitControls.js';
-// import { OrbitControls } from '/js/OrbitControls.js';
+//import { OrbitControls } from '/js/OrbitControls.js';
 
 const scene = new THREE.Scene();
 // THREE.PerspectiveCamera(<FOV>, <aspect-ration>, <near-clipping-plane>, <far-clipping-plane> );
