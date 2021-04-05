@@ -4,18 +4,19 @@
 // first we import everything from the three.s core into this script under the "THREE" namespace:
 // import * as THREE from '/js/three.module.js';
 
+// import { OrbitControls } from '/js/OrbitControls.js';
+import { OrbitControls } from 'https://unpkg.com/three@0.119.0/examples/jsm/controls/OrbitControls.js';
 
-//import { OrbitControls } from '/js/OrbitControls.js';
-//import { OrbitControls } from '/js/OrbitControls.js';
+
+
 
 const scene = new THREE.Scene();
 // THREE.PerspectiveCamera(<FOV>, <aspect-ration>, <near-clipping-plane>, <far-clipping-plane> );
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 const renderer = new THREE.WebGLRenderer({antialias: true});
 
-
-// let controls = new OrbitControls( camera, renderer.domElement );
-// console.log("Camera controls disabled!")
+const controls = new OrbitControls(camera, renderer.domElement);
+//let controls = new OrbitControls( camera, renderer.domElement );
 // // override with my pointer down event
 // controls.addEventListener('start', interceptOrbitalControlEvents, false);
 
