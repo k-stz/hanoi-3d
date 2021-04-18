@@ -6,7 +6,10 @@
 
 // import { OrbitControls } from '/js/OrbitControls.js';
 import { OrbitControls } from 'https://unpkg.com/three@0.119.0/examples/jsm/controls/OrbitControls.js';
-import { forbidden_move_action } from './LoadObjects.js';
+import { foo } from './LoadObjects.js';
+import { ScreenShake } from './utils.js';
+
+var screenShake = ScreenShake();
 
 const scene = new THREE.Scene();
 // THREE.PerspectiveCamera(<FOV>, <aspect-ration>, <near-clipping-plane>, <far-clipping-plane> );
@@ -118,6 +121,8 @@ function animate() {
     // update Text
     document.getElementById("infobox").innerHTML = "Mouse.x:" + mouse.x + "<br> Mouse.y:"+mouse.y + "<br>#:"+scene.children;
     
+    screenShake.update(camera);
+
     // raycasting stuff...
     raycaster.setFromCamera( mouse, camera );
     const intersects = raycaster.intersectObjects( scene.children); // get raycaster collisions
@@ -180,7 +185,7 @@ function onDocumentMouseDown( event ) {
         if (source_stack_height < 1) { // Is there any Disk to take from source?
             selected_rod.material.opacity = 0.1; selected_rod = null;
             console.log("no disks to take from rod")
-            forbidden_move_action();
+            forbidden_move_action("Illegal Move:\nCan't take from empty rod!");
             return;
         }
         if(target_stack_height > 0) { // Target rod has any disk?
@@ -189,7 +194,7 @@ function onDocumentMouseDown( event ) {
             if (top_target_disk.number > top_source_disk.number) { // Top target disk is smaller
                 selected_rod.material.opacity = 0.1; selected_rod = null;
                 console.log("Target's top disk is smaller! ")
-                forbidden_move_action()
+                forbidden_move_action("Illegal Move:\nTarget's top disk is smaller!")
                 return;
             }
         } 
@@ -218,6 +223,15 @@ function onDocumentMouseDown( event ) {
     
 }
 
+const snackbar = document.getElementById("snackbar");
+const shakeVector = new THREE.Vector3(0.2,0,0);
+function forbidden_move_action(violation_text) {
+    console.log("Illegal move");
+    snackbar.innerHTML = violation_text;
+    screenShake.shake(camera, shakeVector, 300 /* ms */ )
+    snackbar.className = "show";
+    setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 4000);
+}
 
 function onDocumentMouseMove( event ) {
     event.preventDefault();

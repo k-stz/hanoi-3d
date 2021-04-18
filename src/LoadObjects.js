@@ -1,6 +1,6 @@
 
-function forbidden_move_action() {
-    console.log("ILLEGAL MOVE YOU SCOUNDREL!");
+function foo() {
+    console.log("TODO implement!");
 }
 
-export { forbidden_move_action };
+export { foo };
