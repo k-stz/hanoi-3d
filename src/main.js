@@ -6,7 +6,7 @@
 
 // import { OrbitControls } from '/js/OrbitControls.js';
 import { OrbitControls } from 'https://unpkg.com/three@0.119.0/examples/jsm/controls/OrbitControls.js';
-
+import { forbidden_move_action } from './LoadObjects.js';
 
 const scene = new THREE.Scene();
 // THREE.PerspectiveCamera(<FOV>, <aspect-ration>, <near-clipping-plane>, <far-clipping-plane> );
@@ -217,9 +217,7 @@ function onDocumentMouseDown( event ) {
     }
     
 }
-function forbidden_move_action() {
-    console.log("ILLEGAL MOVE YOU SCOUNDREL!");
-}
+
 
 function onDocumentMouseMove( event ) {
     event.preventDefault();
